@@ -1,4 +1,7 @@
 package com.codecool.battleship.squere;
 
-public class SquareStatus {
+public enum SquareStatus {
+    EMPTY, SHIP, HIT, MISSED
+
+
 }

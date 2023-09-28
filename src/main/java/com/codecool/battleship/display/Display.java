@@ -1,29 +1,44 @@
 package com.codecool.battleship.display;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Display {
 
-    private void askPlayerName() {
+    public void askPlayerName() {
         System.out.println("Put your name?");
     }
 
 
-    private void askNumberOfMenu() {
-        System.out.println("Choose the number?");
+    public void askMenu() {
+        System.out.println("1 - start new game\n2 - display high scores\n3 - exit");
     }
 
-    private void displayMenu() {
-        System.out.println("1 - start new game\n 2 - display high scores\n 3 - exit");
+    public void putNumberMenu() {
+        System.out.println("Please put the number: ");
     }
 
 
-    private void outcome() {
+    public void askRandomOrManualPlacement() {
+        System.out.println("Choose the number\n1 - random\n2 - manual");
+    }
+
+
+    public void askToCoordinates() {
+        System.out.println("Put coordinates  ex.  a1 or A1?");
+    }
+
+
+
+    public void wrongInput() {
+        System.out.println("Wrong input, try again!");
+    }
+
+
+    public void outcome() {
         System.out.println("The winner is .....");
     }
-
-
-
-
 
 
 }
