@@ -1,15 +1,11 @@
 package com.codecool.battleship.display;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Display {
 
     public void askPlayerName() {
-        System.out.println("Put your name?");
+        System.out.println("Put your name (from 3 char to 8char): ");
     }
-
 
     public void askMenu() {
         System.out.println("1 - start new game\n2 - display high scores\n3 - exit");
@@ -28,7 +24,6 @@ public class Display {
     public void askToCoordinates() {
         System.out.println("Put coordinates  ex.  a1 or A1?");
     }
-
 
 
     public void wrongInput() {

@@ -1,37 +1,41 @@
 package com.codecool.battleship.input;
 
 import com.codecool.battleship.display.Display;
-import com.sun.source.tree.BreakTree;
 
 import java.util.*;
 
+
 public class Input {
     private Scanner scanner;
-    private final List<Integer> CORRECT_NUMBERS_OF_MENU = new ArrayList<>(Arrays.asList(1, 2, 3));
-    private final List<Integer> CORRECT_NUMBERS_OF_PLACEMENT = new ArrayList<>(Arrays.asList(1, 2));
-    private final List<Integer> LIST_OF_COORDINATES_NUMBERS = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-
-    Display message = new Display();
+    private static final int MIN_VALUE_COORDINATE = 1;
+    private static final int MAX_VALUE_COORDINATE = 10;
+    private final Display MESSAGE = new Display();
 
 
-    public int putTheNumberOfMenu() {
+    public int putInputPlayer() {
         this.scanner = new Scanner(System.in);
-        int numberOfMenu = scanner.nextInt();
-        return numberOfMenu;
+        int inputPlayer = scanner.nextInt();
+        return inputPlayer;
     }
 
-    public boolean validateNumberOfMenu() {
-        boolean validNumberOfMenu = false;
-        while (!validNumberOfMenu) {
+
+    public boolean isInputPlayerIsValid(int a, int b) {
+        boolean isValidInput = false;
+        while (!isValidInput) {
             try {
-                int numberMenu = putTheNumberOfMenu();
-                if (CORRECT_NUMBERS_OF_MENU.contains(numberMenu)) {
-                    validNumberOfMenu = true;
-                } else {
-                    message.wrongInput();
+                int playerInput = putInputPlayer();
+
+                if ((playerInput >= a && playerInput <= b )|| (Integer.toString(playerInput).length() >=a)) {
+                    System.out.println("nit int");
+                    isValidInput = true;
+
                 }
-            } catch (InputMismatchException e) {
-                message.wrongInput();
+                else {
+                    MESSAGE.wrongInput();
+                }
+            } catch (InputMismatchException | NumberFormatException e) {
+                MESSAGE.wrongInput();
+                scanner.nextLine();
             }
         }
         return false;
@@ -42,30 +46,6 @@ public class Input {
         this.scanner = new Scanner(System.in);
         String playerName = scanner.nextLine();
         return playerName;
-    }
-
-
-    public int putRandomOrManualPlacement() {
-        this.scanner = new Scanner(System.in);
-        int RandomOrManualPlacement = scanner.nextInt();
-        return RandomOrManualPlacement;
-    }
-
-    public boolean validateRandomOrManualPlacement() {
-        boolean validRandomOrManualPlacement = false;
-        while (!validRandomOrManualPlacement) {
-            try {
-                int number = putRandomOrManualPlacement();
-                if (CORRECT_NUMBERS_OF_PLACEMENT.contains(number)) {
-                    validRandomOrManualPlacement = true;
-                } else {
-                    message.wrongInput();
-                }
-            } catch (InputMismatchException e) {
-                message.wrongInput();
-            }
-        }
-        return false;
     }
 
 
@@ -87,29 +67,29 @@ public class Input {
         return coordinates;
     }
 
-    public boolean validateCoordinatesInRange() {
+    public boolean isValidateCoordinatesInRange() {
         List<String> letters = listLetter();
         boolean validCoordinatesInRange = false;
         while (!validCoordinatesInRange) {
             try {
                 String coordinates = putCoordinates();
                 String firstCoordinate = coordinates.substring(0, 1);
-                System.out.println(firstCoordinate);
-
                 String secondCoordinate = coordinates.substring(1);
-                System.out.println(secondCoordinate);
 
-                if (letters.contains(firstCoordinate.toUpperCase()) && LIST_OF_COORDINATES_NUMBERS.contains(Integer.parseInt(secondCoordinate))){
+                if (letters.contains(firstCoordinate.toUpperCase()) &&
+                        Integer.parseInt(secondCoordinate) >= MIN_VALUE_COORDINATE &&
+                        Integer.parseInt(secondCoordinate) <= MAX_VALUE_COORDINATE) {
                     validCoordinatesInRange = true;
-                }else{
-                    message.wrongInput();
+                } else {
+                    MESSAGE.wrongInput();
                 }
-            }
-            catch (InputMismatchException e ) {
-                message.wrongInput();
+            } catch (InputMismatchException | NumberFormatException e) {
+                MESSAGE.wrongInput();
             }
         }
         return false;
+
+
     }
 
 
