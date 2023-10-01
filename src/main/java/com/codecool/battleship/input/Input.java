@@ -12,52 +12,47 @@ public class Input {
     private final Display MESSAGE = new Display();
 
 
-    public int putInputPlayer() {
+    public int inputPlayer() {
         this.scanner = new Scanner(System.in);
-        int inputPlayer = scanner.nextInt();
-        return inputPlayer;
+        try {
+            int inputPlayer = scanner.nextInt();
+            return inputPlayer;
+        } catch (InputMismatchException | NumberFormatException e) {
+            return -1;
+        }
+
+    }
+
+    public String inputPlayerName() {
+        this.scanner = new Scanner(System.in);
+
+        try {
+            String inputPlayerName = scanner.nextLine();
+            return inputPlayerName;
+        } catch (InputMismatchException e) {
+            return null;
+        }
+
     }
 
 
-    public boolean isInputPlayerIsValid(int a, int b) {
-        boolean isValidInput = false;
-        while (!isValidInput) {
-            try {
-                int playerInput = putInputPlayer();
-
-                if ((playerInput >= a && playerInput <= b )|| (Integer.toString(playerInput).length() >=a)) {
-                    System.out.println("nit int");
-                    isValidInput = true;
-
-                }
-                else {
-                    MESSAGE.wrongInput();
-                }
-            } catch (InputMismatchException | NumberFormatException e) {
-                MESSAGE.wrongInput();
-                scanner.nextLine();
-            }
+    public boolean isInputPlayerIsValid(int playerInput, int a, int b) {
+        if (playerInput >= a && playerInput <= b) {
+            return true;
+        } else {
+            MESSAGE.wrongInput();
         }
         return false;
     }
 
-
-    public String putPlayerName() {
-        this.scanner = new Scanner(System.in);
-        String playerName = scanner.nextLine();
-        return playerName;
-    }
-
-
-    public List<String> listLetter() {
-        char character;
-        List<String> letter = new ArrayList<>();
-        char FIRST_LETTER = 'A';
-        char LAST_LETTER = 'J';
-        for (character = FIRST_LETTER; character <= LAST_LETTER; ++character) {
-            letter.add(String.valueOf(character));
+    public boolean isInputPlayerNameIsValid(String playerInputName, int a, int b) {
+        if (playerInputName.length() >= a && playerInputName.length() <= b) {
+            return true;
+        } else {
+            MESSAGE.wrongInput();
         }
-        return letter;
+
+        return false;
     }
 
 
@@ -68,7 +63,7 @@ public class Input {
     }
 
     public boolean isValidateCoordinatesInRange() {
-        List<String> letters = listLetter();
+        List<String> letters = MESSAGE.getLetters();
         boolean validCoordinatesInRange = false;
         while (!validCoordinatesInRange) {
             try {

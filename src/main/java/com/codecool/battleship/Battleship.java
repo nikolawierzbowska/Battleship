@@ -1,49 +1,67 @@
 package com.codecool.battleship;
 
+import com.codecool.battleship.board.Board;
 import com.codecool.battleship.display.Display;
+import com.codecool.battleship.game.Game;
 import com.codecool.battleship.input.Input;
 
 public class Battleship {
-    private Input inputPlayer;
-    private Display displayMessage;
+    private final Input inputPlayer = new Input();
+    private final Display displayMessage = new Display();
+
+    private Board ocean;
 
     private static final int MIN_VALUE_OF_MENU = 1;
     private static final int MAX_VALUE_OF_MENU = 3;
-    private static final int MIN_VALUE_OF_NAME = 3;
-    private static final int MAX_VALUE_OF_NAME = 10;
-    private static final int MIN_VALUE_OF_PLACEMENT = 1;
-    private static final int MAX_VALUE_OF_PLACEMENT = 2;
+    private static final int VALUE_OF_COME_BACK = 4;
 
 
-    protected void displayMenu() {
-        displayMessage = new Display();
-//        displayMessage.askMenu();
-//        displayMessage.putNumberMenu();
-
-        displayMessage.askPlayerName();
-//        displayMessage.askRandomOrManualPlacement();
-//        displayMessage.askToCoordinates();
+//    this.ocean = new Board();
+//        displayMessage.printBoard(ocean.getBoard());
 
 
+    public void displayMenu() {
+        displayMessage.displayMenu();
+        displayMessage.putNumberMenu();
     }
 
-    protected void choseNumberOfMenu(){
-        inputPlayer = new Input();
-//        inputPlayer.isInputPlayerIsValid(MIN_VALUE_OF_MENU, MAX_VALUE_OF_MENU);
-//        inputPlayer.isInputPlayerIsValid(MIN_VALUE_OF_NAME, MAX_VALUE_OF_NAME);
-//        inputPlayer.isInputPlayerIsValid(MIN_VALUE_OF_PLACEMENT, MAX_VALUE_OF_PLACEMENT);
+
+
 //        inputPlayer.isValidateCoordinatesInRange();
 
 
-        inputPlayer.isInputPlayerIsValid(MIN_VALUE_OF_NAME, MAX_VALUE_OF_NAME);
 
+
+
+
+    public void runProgram(){
+        displayMenu();
+        int playerInput;
+       do {playerInput= inputPlayer.inputPlayer();
+       }
+       while (!inputPlayer.isInputPlayerIsValid(playerInput,MIN_VALUE_OF_MENU, MAX_VALUE_OF_MENU));
+            if(playerInput ==1){
+                Game game = new Game();
+                game.startGame();
+
+            }else if(playerInput ==2){
+                displayMessage.readFile();
+                do {playerInput= inputPlayer.inputPlayer();
+                }
+                while (!(inputPlayer.isInputPlayerIsValid(playerInput,VALUE_OF_COME_BACK, VALUE_OF_COME_BACK)));
+                displayMessage.displayMenu();
+            }else {
+                System.exit(3);
+            }
 
 
 
 
     }
 
-
-
-
 }
+
+
+
+
+
