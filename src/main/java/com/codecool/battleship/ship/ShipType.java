@@ -6,7 +6,7 @@ import java.util.List;
 public enum ShipType {
     CARRIER(5), CRUISER(3), BATTLESHIP(4), SUBMARINE(3), DESTROYER(2);
 
-    private ShipType shipType;
+    public ShipType shipType;
     public final int length;
 
 

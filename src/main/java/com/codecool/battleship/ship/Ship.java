@@ -8,7 +8,9 @@ public class Ship {
 
     public List<Square> shipLocated;
 
-
+    public List<Square> getShipLocated() {
+        return shipLocated;
+    }
 
     public Ship(List<Square> shipLocated) {
         this.shipLocated = shipLocated;

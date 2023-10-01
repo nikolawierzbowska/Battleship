@@ -35,11 +35,13 @@ public class Battleship {
 
 
     public void runProgram(){
-        displayMenu();
-        int playerInput;
-       do {playerInput= inputPlayer.inputPlayer();
-       }
-       while (!inputPlayer.isInputPlayerIsValid(playerInput,MIN_VALUE_OF_MENU, MAX_VALUE_OF_MENU));
+        boolean isFinished = false;
+        while(! isFinished) {
+            displayMenu();
+            int playerInput;
+            do {playerInput= inputPlayer.inputPlayer();
+            }
+            while (!inputPlayer.isInputPlayerIsValid(playerInput,MIN_VALUE_OF_MENU, MAX_VALUE_OF_MENU));
             if(playerInput ==1){
                 Game game = new Game();
                 game.startGame();
@@ -49,13 +51,13 @@ public class Battleship {
                 do {playerInput= inputPlayer.inputPlayer();
                 }
                 while (!(inputPlayer.isInputPlayerIsValid(playerInput,VALUE_OF_COME_BACK, VALUE_OF_COME_BACK)));
-                displayMessage.displayMenu();
+
             }else {
                 System.exit(3);
+                isFinished = true;
             }
 
-
-
+        }
 
     }
 

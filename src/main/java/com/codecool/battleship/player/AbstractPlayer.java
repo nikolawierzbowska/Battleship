@@ -14,9 +14,6 @@ public abstract class AbstractPlayer implements Player {
     }
 
 
-
-
-
     public String getName() {
         return name;
     }

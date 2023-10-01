@@ -14,7 +14,7 @@ public class Display {
     private final int sizeBoard = 10;
 
 
-    public void askPlayerName() {
+    public void askForPlayerName() {
         System.out.println("Put your name (from 3 char to 8char): ");
     }
 
@@ -26,15 +26,25 @@ public class Display {
         System.out.println("Please put the number: ");
     }
 
-    public void askRandomOrManualPlacement() {
+    public void askForRandomOrManualPlacement() {
         System.out.println(" How to placement ship - choose the number\n1 - random\n2 - manual");
     }
 
-    public void askToCoordinates() {
+    public void askForDirection() {
+        System.out.println("Please write down the correct direction:\nVU - VERTICAL UP, VD - VERTICAL DOWN, HR- HORIZONTAL RIGHT, HL - HORIZONTAL LEFT:  ");
+    }
+
+    public void askForTypeOfShip() {
+        System.out.println("Please write the ship:\n1- CARRIER, 2- CRUISER,3- BATTLESHIP,4- SUBMARINE,5- DESTROYER: ");
+    }
+
+
+
+    public void askForCoordinates() {
         System.out.println("Put coordinates  ex.  a1 or A1?");
     }
 
-    public void wrongInput() {
+    public void printWrongInputMessage() {
         System.out.println("Wrong input, try again!");
     }
 
@@ -80,11 +90,9 @@ public class Display {
                 strBuilderBoard.append(" " + (i + 1) + " " + "|");
             }
             for (int j = 0; j < sizeBoard; j++) {
-                strBuilderBoard.append(ocean[i][j].getSquareStatus().character);
+                strBuilderBoard.append(ocean[j][i].getSquareStatus().character);
                 strBuilderBoard.append("|");
-
             }
-
             if (i < 9) {
                 strBuilderBoard.append(" " + "0" + (i + 1) + " ");
             } else {
@@ -96,7 +104,6 @@ public class Display {
         for (int k = 0; k < sizeBoard; k++) {
             strBuilderBoard.append("----");
         }
-
         strBuilderBoard.append("\n");
         strBuilderBoard.append(printLetters());
         System.out.println(strBuilderBoard);
@@ -106,7 +113,6 @@ public class Display {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-
     }
 
     public  void readFile() {
