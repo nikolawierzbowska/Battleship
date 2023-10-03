@@ -68,7 +68,7 @@ public class Display {
         String result = "    |";
         List<String> alphabet = getLetters();
         for (String letter : alphabet) {
-            result += " " + letter + " " + "|";
+            result += " " + letter + " " + " |";
         }
         result += " \n";
         return result;
@@ -79,9 +79,9 @@ public class Display {
         StringBuilder strBuilderBoard = new StringBuilder();
         strBuilderBoard.append(printLetters());
         for (int i = 0; i < sizeBoard; i++) {
-            strBuilderBoard.append("   ");
+            strBuilderBoard.append("     ");
             for (int k = 0; k < sizeBoard; k++) {
-                strBuilderBoard.append("----");
+                strBuilderBoard.append("-----");
             }
             strBuilderBoard.append("\n");
             if (i < 9) {
@@ -102,7 +102,7 @@ public class Display {
         }
         strBuilderBoard.append("   ");
         for (int k = 0; k < sizeBoard; k++) {
-            strBuilderBoard.append("----");
+            strBuilderBoard.append("-----");
         }
         strBuilderBoard.append("\n");
         strBuilderBoard.append(printLetters());

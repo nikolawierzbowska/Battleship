@@ -23,14 +23,6 @@ public enum ShipType {
     }
 
 
-//    public static List<ShipType> getListShips(){
-//        List<ShipType> typeShips = new ArrayList<>();
-//        typeShips.add(ShipType.CARRIER);
-//        typeShips.add(ShipType.CRUISER);
-//        typeShips.add(ShipType.BATTLESHIP);
-//        typeShips.add(ShipType.SUBMARINE);
-//        typeShips.add(ShipType.DESTROYER);
-//    return typeShips;
-//    }
+
 
 }
