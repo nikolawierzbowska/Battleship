@@ -1,7 +1,5 @@
 package com.codecool.battleship.input;
-
 import com.codecool.battleship.display.Display;
-
 import java.util.*;
 
 
@@ -19,7 +17,6 @@ public class Input {
         } catch (InputMismatchException | NumberFormatException e) {
             return -1;
         }
-
     }
 
     public String inputPlayerString() {
@@ -41,6 +38,7 @@ public class Input {
         return false;
     }
 
+
     public boolean isInputPlayerNameIsValid(String playerInputName, int a, int b) {
         if (playerInputName.length() >= a && playerInputName.length() <= b) {
             return true;
@@ -59,8 +57,8 @@ public class Input {
         } catch (InputMismatchException | NumberFormatException e) {
             return null;
         }
-
     }
+
 
     public boolean isValidateCoordinatesInRange(String coordinates) {
         List<String> letters = displayMessage.getLetters();
@@ -77,15 +75,11 @@ public class Input {
         } catch (InputMismatchException | NumberFormatException e){
             displayMessage.printWrongInputMessage();
         }
-
         return false;
     }
-
 
 
     public boolean isValidateDirection(String direction){
         return direction. equals("VU") || direction.equals("VD") || direction.equals("HL") || direction.equals("HR");
     }
-
-
 }

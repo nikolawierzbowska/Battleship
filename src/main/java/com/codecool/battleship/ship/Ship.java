@@ -1,18 +1,12 @@
 package com.codecool.battleship.ship;
-
 import com.codecool.battleship.squere.Square;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
+    private final List<Square> squareList = new ArrayList<>();
 
-    public List<Square> shipLocated;
-
-    public List<Square> getShipLocated() {
-        return shipLocated;
-    }
-
-    public Ship(List<Square> shipLocated) {
-        this.shipLocated = shipLocated;
+    public List<Square> getSquareList() {
+        return squareList;
     }
 }

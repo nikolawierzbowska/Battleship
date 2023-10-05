@@ -1,8 +1,5 @@
 package com.codecool.battleship.display;
-
-
 import com.codecool.battleship.squere.Square;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
@@ -10,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Display {
-
     private final int sizeBoard = 10;
 
 
@@ -26,8 +22,9 @@ public class Display {
         System.out.println("Please put the number: ");
     }
 
+
     public void askForRandomOrManualPlacement() {
-        System.out.println(" How to placement ship - choose the number\n1 - random\n2 - manual");
+        System.out.println("How to placement ship - choose the number\n1 - random\n2 - manual");
     }
 
     public void askForDirection() {
@@ -37,7 +34,6 @@ public class Display {
     public void askForTypeOfShip() {
         System.out.println("Please write the ship:\n1- CARRIER, 2- CRUISER,3- BATTLESHIP,4- SUBMARINE,5- DESTROYER: ");
     }
-
 
 
     public void askForCoordinates() {
@@ -110,7 +106,28 @@ public class Display {
     }
 
 
-    public static void clearScreen() {
+    public void messageMissed(){
+        System.out.println("You missed!");
+    }
+
+    public void messageHit(){
+        System.out.println("You hit!");
+    }
+
+    public void gameEndMessage(String playerName){
+        System.out.println("Game Over\nThe winner is: " +playerName);
+    }
+
+    public void printMessage(String message){
+        System.out.println(message);
+    }
+
+    public void printNumberOfShip(int message){
+        System.out.println("Number of ships to placed: "+message);
+    }
+
+
+    public  void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -126,9 +143,5 @@ public class Display {
             e.printStackTrace();
         }
         System.out.println("Put number 4 to come back");
-
-
     }
-
-
 }

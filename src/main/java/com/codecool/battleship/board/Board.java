@@ -1,8 +1,9 @@
 package com.codecool.battleship.board;
-
+import com.codecool.battleship.ship.Ship;
 import com.codecool.battleship.ship.ShipType;
 import com.codecool.battleship.squere.Square;
 import com.codecool.battleship.squere.SquareStatus;
+
 
 public class Board {
     public final int BOARD_SIZE = 10;
@@ -27,8 +28,38 @@ public class Board {
         return ocean;
     }
 
-    public void setOcean(Square[][] ocean, int x, int y) {
-        this.ocean = ocean;
+
+    public Ship putShipOnBoard(int x, int y, ShipType shipType, String direction) {
+        Ship ship = new Ship();
+
+        for (int i = 0; i < shipType.length; i++) {
+            int newX = x;
+            int newY = y;
+            switch (direction) {
+                case "VU" -> newY = y - i;
+                case "VD" -> newY = y + i;
+                case "HL" -> newX = x - i;
+                case "HR" -> newX = x + i;
+            }
+            ship.getSquareList().add(ocean[newX][newY]);
+            ocean[newX][newY].setSquareStatus(SquareStatus.SHIP);
+            for (Square square : ship.getSquareList()) {
+                if (square.getX() == x && square.getY() == y) {
+                    square.setSquareStatus(SquareStatus.SHIP);
+                }
+            }
+        }
+        return ship;
+    }
+
+
+    public Square[][] manualPlacement(Ship ship) {
+        for (int i = 0; i < ship.getSquareList().size(); i++) {
+            int newX =   ship.getSquareList().get(i).getX();
+            int newY =   ship.getSquareList().get(i).getY();
+            ocean[newX][newY] = new Square(newX, newY, SquareStatus.SHIP);
+        }
+        return ocean;
     }
 
     public boolean isVerticalDirectionCorrect(int x, int y, int shipLength, int a) {
@@ -59,9 +90,8 @@ public class Board {
                 if((y-i) >0 && ocean[x][y -i].getSquareStatus() != SquareStatus.EMPTY) {
                     return false;
                 }
-
-                if ((x > 0 && x < 9) && (y > 0 && y < 9) && (ocean[x - 1][y - i * a].getSquareStatus() != SquareStatus.EMPTY) ||
-                        (ocean[x + 1][y - i * a].getSquareStatus() != SquareStatus.EMPTY)) {
+                if (((x > 0 && x < 9) && (y > 0 && y < 9) && (ocean[x - 1][y - i * a].getSquareStatus() != SquareStatus.EMPTY)) ||
+                        ((x > 0 && x < 9) && (y > 0 && y < 9) && (ocean[x + 1][y - i * a].getSquareStatus() != SquareStatus.EMPTY))) {
                     return false;
                 }
                 if (x == 0 && (ocean[x + 1][y - i * a].getSquareStatus() != SquareStatus.EMPTY)) {
@@ -103,8 +133,8 @@ public class Board {
                 if((y-i) >0 && ocean[x][y -i].getSquareStatus() != SquareStatus.EMPTY) {
                     return false;
                 }
-                if ((x > 0 && x < 9) && (y > 0 && y < 9) && (ocean[x - i * a][y - 1].getSquareStatus() != SquareStatus.EMPTY) ||
-                        (ocean[x - i * a][y + 1].getSquareStatus() != SquareStatus.EMPTY)) {
+                if (((x > 0 && x < 9) && (y > 0 && y < 9) && (ocean[x - i * a][y - 1].getSquareStatus() != SquareStatus.EMPTY)) ||
+                        ((x > 0 && x < 9) && (y > 0 && y < 9) &&    (ocean[x - i * a][y + 1].getSquareStatus() != SquareStatus.EMPTY))) {
                     return false;
                 }
                 if (y == 0 && (ocean[x - i * a][y + 1].getSquareStatus() != SquareStatus.EMPTY)) {
@@ -129,7 +159,4 @@ public class Board {
         }
         return result;
     }
-
-
-
 }
