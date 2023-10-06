@@ -101,9 +101,9 @@ public class Game {
 
 
     public String askForDirection() {
-        displayMessage.askForDirection();
         String direction;
         do {
+            displayMessage.askForDirection();
             direction = inputPlayer.inputPlayerString().toUpperCase();
         }
         while (!inputPlayer.isValidateDirection(direction));
@@ -130,13 +130,12 @@ public class Game {
                 if (!board.isPlacementOk(x, y, type, direction)) {
                     displayMessage.printWrongInputMessage();
                 } else {
-                    ship = board.putShipOnBoard(x, y, type, direction);
+                    ship = board.createdShip(x, y, type, direction);
 
                     List<Ship> ships = new ArrayList<>();
                     ships.add(ship);
                     player.setShips(ships);
-                    displayMessage.printBoard(board.manualPlacement(ship));
-
+                    displayMessage.printBoard(board.manualPlacementOnBoard(ship));
                     --numberOfShip;
                 }
             } while (numberOfShip > 0);
@@ -151,22 +150,54 @@ public class Game {
     }
 
 
-    public void shoot(String name, Board board, Board emptyBoard) {
-        displayMessage.printMessage(name);
+    public void shoot(HumanPlayer player, Board board, Board emptyBoard) {
+        if (board == board1){
+            displayMessage.printMessage(player2.getName());
+        }else {
+            displayMessage.printMessage(player1.getName());
+        }
+
         displayMessage.printBoard(emptyBoard.getBoard());
         int[] coordinates = getCoordinates();
         int x = coordinates[0];
         int y = coordinates[1];
 
-        if (board.getBoard()[x][y].getSquareStatus().equals(SquareStatus.SHIP)) {
-            displayMessage.messageHit();
 
-            for (Square s : ship.getSquareList()) {
-                if (s.getX() == x && s.getY() == y)
-                    s.setSquareStatus(SquareStatus.EMPTY);
+        if (board.getBoard()[x][y].getSquareStatus().equals(SquareStatus.SHIP)) {
+            for (Ship ship : player.getShips()){
+                for(Square s : ship.getSquareList()){
+                    if (s.getX() == x && s.getY() == y) {
+                        s.setSquareStatus(SquareStatus.HIT);
+
+                        emptyBoard.getBoard()[x][y].setSquareStatus(SquareStatus.HIT);
+
+                }
+
+
+
+                }
             }
-            emptyBoard.getBoard()[x][y].setSquareStatus(SquareStatus.HIT);
-            displayMessage.printBoard(emptyBoard.getBoard());
+
+            int count = 0;
+            for (Square s : ship.getSquareList()) {
+
+                if (s.getSquareStatus().equals(SquareStatus.HIT)) {
+                    count++;
+                }
+            }
+                if(count == ship.getSquareList().size()){
+                    for (Square sq : ship.getSquareList()) {
+                        emptyBoard.getBoard()[sq.getX()][sq.getY()].setSquareStatus(SquareStatus.SUNK);
+
+                    }
+                    displayMessage.messageSunk();
+                    displayMessage.printBoard(emptyBoard.getBoard());
+                }
+                else{
+                    displayMessage.messageHit();
+                    displayMessage.printBoard(emptyBoard.getBoard());
+
+                }
 
         } else {
             displayMessage.messageMissed();
@@ -179,16 +210,17 @@ public class Game {
     public boolean startGame() {
         playRoundToPutShips();
         do {
-            shoot(player1.getName(), board2, boardShoot2);
+            shoot(player2, board2, boardShoot2);
             if (player2.isAlive()) {
-                shoot(player2.getName(), board1, boardShoot1);
+                shoot(player1, board1, boardShoot1);
             }
         }
         while (player1.isAlive() && player2.isAlive());
 
         if (player1.isAlive()) {
             displayMessage.gameEndMessage(player1.getName());
-        } else {
+        }
+        if(player2.isAlive()) {
             displayMessage.gameEndMessage(player2.getName());
         }
         return false;

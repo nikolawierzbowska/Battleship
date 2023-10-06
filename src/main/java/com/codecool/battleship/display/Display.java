@@ -114,6 +114,11 @@ public class Display {
         System.out.println("You hit!");
     }
 
+    public void messageSunk(){
+        System.out.println("You sunk the ship!");
+    }
+
+
     public void gameEndMessage(String playerName){
         System.out.println("Game Over\nThe winner is: " +playerName);
     }

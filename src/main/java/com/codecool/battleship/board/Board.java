@@ -7,7 +7,7 @@ import com.codecool.battleship.squere.SquareStatus;
 
 public class Board {
     public final int BOARD_SIZE = 10;
-    private Square[][] ocean;
+    private final Square[][] ocean;
 
 
     public Board() {
@@ -29,7 +29,7 @@ public class Board {
     }
 
 
-    public Ship putShipOnBoard(int x, int y, ShipType shipType, String direction) {
+    public Ship createdShip(int x, int y, ShipType shipType, String direction) {
         Ship ship = new Ship();
 
         for (int i = 0; i < shipType.length; i++) {
@@ -53,7 +53,7 @@ public class Board {
     }
 
 
-    public Square[][] manualPlacement(Ship ship) {
+    public Square[][] manualPlacementOnBoard(Ship ship) {
         for (int i = 0; i < ship.getSquareList().size(); i++) {
             int newX =   ship.getSquareList().get(i).getX();
             int newY =   ship.getSquareList().get(i).getY();
